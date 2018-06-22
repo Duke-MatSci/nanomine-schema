@@ -1,2 +1,3 @@
-# NanoMine schemas and excel based input forms
+# NanoMine schema and excel based input forms
+
 
