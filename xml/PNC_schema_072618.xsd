@@ -1587,8 +1587,8 @@
     </xsd:complexType>
     <xsd:complexType name="SurfaceAreaType">
         <xsd:choice>
-            <xsd:element minOccurs="1" name="specific" type="PositiveValueUnitType"/>
-            <xsd:element minOccurs="1" name="total" type="PositiveValueUnitType"/>
+            <xsd:element minOccurs="1" name="specific" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="1" name="total" type="ScalarUncertainty"/>
         </xsd:choice>
     </xsd:complexType>
 </xsd:schema>
