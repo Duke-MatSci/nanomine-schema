@@ -268,9 +268,38 @@
     <xsd:complexType name="DielectricDispersionType">
         <xsd:sequence>
             <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DielectricDispersionDependence" type="DDDependenceType"/>
             <xsd:element minOccurs="0" name="Dielectric_Real_Permittivity" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="Dielectric_Loss_Permittivity" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="Dielectric_Loss_Tangent" type="ScalarUncertainty"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DDDependenceType">
+        <xsd:choice>
+            <xsd:element name="FrequencyDependence" type="DDFrequencyDependenceType"/>
+            <xsd:element name="TemperatureDependence" type="DDTemperatureDependenceType"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="DDFrequencyDependenceType">
+        <xsd:sequence>
+            <xsd:element name="condition" type="DDFrequencyConditionType"
+                minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DDFrequencyConditionType">
+        <xsd:sequence minOccurs="1">
+            <xsd:element name="temperature" type="TemperatureType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DDTemperatureDependenceType">
+        <xsd:sequence>
+            <xsd:element name="condition" type="DDTemperatureConditionType"
+                minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DDTemperatureConditionType">
+        <xsd:sequence minOccurs="1">
+            <xsd:element name="frequency" type="ScalarUncertainty" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="CreepType">
@@ -1126,19 +1155,19 @@
     </xsd:simpleType>
     <xsd:complexType name="DMAFrequencySweepType">
         <xsd:sequence>
-            <xsd:element maxOccurs="unbounded" name="condition" type="DMAFrequencyType"
+            <xsd:element name="condition" type="DMAFrequencyType"
                 minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="DMATemperatureSweepType">
         <xsd:sequence>
-            <xsd:element maxOccurs="unbounded" name="condition" type="DMATemperatureType"
+            <xsd:element name="condition" type="DMATemperatureType"
                 minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="DMAStrainSweepType">
         <xsd:sequence>
-            <xsd:element maxOccurs="unbounded" name="condition" type="DMAStrainSweepTypeType"
+            <xsd:element name="condition" type="DMAStrainSweepTypeType"
                 minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
@@ -1327,7 +1356,7 @@
     <xsd:complexType name="SDFFunction">
         <xsd:sequence>
             <xsd:element name="FunctionType" type="FunctionType"/>
-            <xsd:element maxOcuurs="unbounded" name="Parameters" type="xsd:double"/>
+            <xsd:element maxOccurs="unbounded" name="Parameters" type="xsd:double"/>
             <xsd:element name="FunctionDefinition" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
