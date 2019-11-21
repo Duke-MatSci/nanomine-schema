@@ -1505,10 +1505,10 @@
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="Percentage">
-        <xsd:choice>
+        <xsd:sequence>
             <xsd:element name="mass" type="PercentageValueType"/>
             <xsd:element name="volume" type="PercentageValueType"/>
-        </xsd:choice>
+        </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="TemperatureType">
         <xsd:sequence>
