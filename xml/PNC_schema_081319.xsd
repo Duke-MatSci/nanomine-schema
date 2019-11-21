@@ -1241,7 +1241,9 @@
             <xsd:element minOccurs="0" name="TensileModulus" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="TensileStressAtBreak" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="TensileStressAtYield" type="ScalarUncertainty"/>
-            <xsd:element minOccurs="0" name="ElongationAtYield" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="TensileStrength" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="StressRelaxation" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="StrainAtBreak" type="ScalarUncertainty"/><xsd:element minOccurs="0" name="ElongationAtYield" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="ElongationAtBreak" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="TensileToughness" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="FiberTensileModulus" type="ScalarUncertainty"/>
@@ -1267,7 +1269,8 @@
     <xsd:complexType name="EWFType">
         <xsd:sequence>
             <xsd:element name="preCrackingProcess" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="strainRate" type="ScalarUncertainty"/>
+            <xsd:element name="strainRate" type="ScalarUncertainty" minOccurs="0"/>
+            <xsd:element name="FractureEnergy" type="ScalarUncertainty" minOccurs="0"/>
             <xsd:element name="profile" minOccurs="0" type="Distribution"> </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
@@ -1276,6 +1279,7 @@
             <xsd:element name="sampleShape" type="xsd:string" minOccurs="0"/>
             <xsd:element name="preCrackingProcess" type="xsd:string" minOccurs="0"/>
             <xsd:element name="strainRate" type="ScalarUncertainty" minOccurs="0"/>
+            <xsd:element name="FractureEnergy" type="ScalarUncertainty" minOccurs="0"/>
             <xsd:element name="K-factor" type="xsd:string" minOccurs="0"/>
             <xsd:element name="profile" minOccurs="0" type="Distribution"> </xsd:element>
         </xsd:sequence>
@@ -1285,6 +1289,7 @@
             <xsd:element name="sampleShape" type="xsd:string" minOccurs="0"/>
             <xsd:element name="preCrackingProcess" type="xsd:string" minOccurs="0"/>
             <xsd:element name="strainRate" type="ScalarUncertainty" minOccurs="0"/>
+            <xsd:element name="FractureEnergy" type="ScalarUncertainty" minOccurs="0"/>
             <xsd:element name="J-integral" type="xsd:string" minOccurs="0"/>
             <xsd:element name="profile" minOccurs="0" type="Distribution"> </xsd:element>
         </xsd:sequence>
