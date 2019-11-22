@@ -1204,7 +1204,7 @@
                 maxOccurs="unbounded"/>
             <xsd:element minOccurs="0" name="LC_PhaseTransitionTemperature" type="TemperatureType"/>
             <xsd:element minOccurs="0" name="MeltingTemperature" type="TemperatureType"/>
-            <xsd:element minOccurs="0" name="SpecificHeatCapacity_Cp" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="SpecificHeatCapacity_Cp" type="ScalarUncertainty" maxOccurs="unbounded"/>
             <xsd:element minOccurs="0" name="SpecificHeatCapacity_Cv" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="ThermalConductivity" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="ThermalDiffusivity" type="ScalarUncertainty"/>
