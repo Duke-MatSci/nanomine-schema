@@ -1599,6 +1599,7 @@
             <xsd:element minOccurs="0" name="description" type="xsd:string"/>
             <xsd:element minOccurs="0" name="value" type="PositiveValueType"/>
             <xsd:element minOccurs="0" name="unit" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:simpleType name="PositiveValueType">
