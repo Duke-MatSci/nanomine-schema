@@ -1506,8 +1506,8 @@
     </xsd:complexType>
     <xsd:complexType name="Percentage">
         <xsd:sequence>
-            <xsd:element name="mass" type="PercentageValueType"/>
-            <xsd:element name="volume" type="PercentageValueType"/>
+            <xsd:element name="mass" minOccurs="0" type="PercentageValueType"/>
+            <xsd:element name="volume" minOccurs="0" type="PercentageValueType"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="TemperatureType">
