@@ -422,10 +422,10 @@
     </xsd:complexType>
     <xsd:simpleType name="TacticityType">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="Isotactic"/>
-            <xsd:enumeration value="Syndiotactic"/>
-            <xsd:enumeration value="Atactic"/>
-            <xsd:enumeration value="Eutactic"/>
+            <xsd:enumeration value="isotactic"/>
+            <xsd:enumeration value="syndiotactic"/>
+            <xsd:enumeration value="atactic"/>
+            <xsd:enumeration value="eutactic"/>
         </xsd:restriction>
     </xsd:simpleType>
     <xsd:simpleType name="CitationFieldType">
