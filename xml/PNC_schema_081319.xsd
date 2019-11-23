@@ -223,7 +223,7 @@
             <xsd:element maxOccurs="unbounded" minOccurs="0" name="WeightLoss"
                 type="ScalarUncertainty"/>
             <xsd:element maxOccurs="unbounded" minOccurs="0" name="InterphaseThickness"
-                type="DistanceUnitType"/>
+                type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="Density" type="PositiveValueUnitType"
                 maxOccurs="unbounded"/>
             <xsd:element minOccurs="0" name="LinearExpansionCoefficient" type="ScalarUncertainty"
