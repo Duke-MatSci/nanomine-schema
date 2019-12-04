@@ -223,7 +223,7 @@
             <xsd:element maxOccurs="unbounded" minOccurs="0" name="WeightLoss"
                 type="ScalarUncertainty"/>
             <xsd:element maxOccurs="unbounded" minOccurs="0" name="InterphaseThickness"
-                type="DistanceUnitType"/>
+                type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="Density" type="PositiveValueUnitType"
                 maxOccurs="unbounded"/>
             <xsd:element minOccurs="0" name="LinearExpansionCoefficient" type="ScalarUncertainty"
@@ -422,10 +422,10 @@
     </xsd:complexType>
     <xsd:simpleType name="TacticityType">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="Isotactic"/>
-            <xsd:enumeration value="Syndiotactic"/>
-            <xsd:enumeration value="Atactic"/>
-            <xsd:enumeration value="Eutactic"/>
+            <xsd:enumeration value="isotactic"/>
+            <xsd:enumeration value="syndiotactic"/>
+            <xsd:enumeration value="atactic"/>
+            <xsd:enumeration value="eutactic"/>
         </xsd:restriction>
     </xsd:simpleType>
     <xsd:simpleType name="CitationFieldType">
@@ -1130,7 +1130,7 @@
             <xsd:element minOccurs="0" name="MeasurementMode" type="DMATypes"/>
             <xsd:element minOccurs="0" name="MeasurementMethod" type="ViscoelasticMethodType"/>
             <xsd:element minOccurs="0" name="DMA_mode" type="DMAMethodType"/>
-            <xsd:element maxOccurs="1" minOccurs="0" name="DynamicPropertyProfile"
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="DynamicPropertyProfile"
                 type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="MasterCurve" type="Distribution"/>
         </xsd:sequence>
@@ -1204,7 +1204,7 @@
                 maxOccurs="unbounded"/>
             <xsd:element minOccurs="0" name="LC_PhaseTransitionTemperature" type="TemperatureType"/>
             <xsd:element minOccurs="0" name="MeltingTemperature" type="TemperatureType"/>
-            <xsd:element minOccurs="0" name="SpecificHeatCapacity_Cp" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="SpecificHeatCapacity_Cp" type="ScalarUncertainty" maxOccurs="unbounded"/>
             <xsd:element minOccurs="0" name="SpecificHeatCapacity_Cv" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="ThermalConductivity" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="ThermalDiffusivity" type="ScalarUncertainty"/>
@@ -1241,7 +1241,9 @@
             <xsd:element minOccurs="0" name="TensileModulus" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="TensileStressAtBreak" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="TensileStressAtYield" type="ScalarUncertainty"/>
-            <xsd:element minOccurs="0" name="ElongationAtYield" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="TensileStrength" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="StressRelaxation" type="ScalarUncertainty"/>
+            <xsd:element minOccurs="0" name="StrainAtBreak" type="ScalarUncertainty"/><xsd:element minOccurs="0" name="ElongationAtYield" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="ElongationAtBreak" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="TensileToughness" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="FiberTensileModulus" type="ScalarUncertainty"/>
@@ -1267,7 +1269,8 @@
     <xsd:complexType name="EWFType">
         <xsd:sequence>
             <xsd:element name="preCrackingProcess" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="strainRate" type="ScalarUncertainty"/>
+            <xsd:element name="strainRate" type="ScalarUncertainty" minOccurs="0"/>
+            <xsd:element name="FractureEnergy" type="ScalarUncertainty" minOccurs="0"/>
             <xsd:element name="profile" minOccurs="0" type="Distribution"> </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
@@ -1276,6 +1279,7 @@
             <xsd:element name="sampleShape" type="xsd:string" minOccurs="0"/>
             <xsd:element name="preCrackingProcess" type="xsd:string" minOccurs="0"/>
             <xsd:element name="strainRate" type="ScalarUncertainty" minOccurs="0"/>
+            <xsd:element name="FractureEnergy" type="ScalarUncertainty" minOccurs="0"/>
             <xsd:element name="K-factor" type="xsd:string" minOccurs="0"/>
             <xsd:element name="profile" minOccurs="0" type="Distribution"> </xsd:element>
         </xsd:sequence>
@@ -1285,6 +1289,7 @@
             <xsd:element name="sampleShape" type="xsd:string" minOccurs="0"/>
             <xsd:element name="preCrackingProcess" type="xsd:string" minOccurs="0"/>
             <xsd:element name="strainRate" type="ScalarUncertainty" minOccurs="0"/>
+            <xsd:element name="FractureEnergy" type="ScalarUncertainty" minOccurs="0"/>
             <xsd:element name="J-integral" type="xsd:string" minOccurs="0"/>
             <xsd:element name="profile" minOccurs="0" type="Distribution"> </xsd:element>
         </xsd:sequence>
@@ -1500,10 +1505,10 @@
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="Percentage">
-        <xsd:choice>
-            <xsd:element name="mass" type="PercentageValueType"/>
-            <xsd:element name="volume" type="PercentageValueType"/>
-        </xsd:choice>
+        <xsd:sequence>
+            <xsd:element name="mass" minOccurs="0" type="PercentageValueType"/>
+            <xsd:element name="volume" minOccurs="0" type="PercentageValueType"/>
+        </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="TemperatureType">
         <xsd:sequence>
@@ -1594,6 +1599,7 @@
             <xsd:element minOccurs="0" name="description" type="xsd:string"/>
             <xsd:element minOccurs="0" name="value" type="PositiveValueType"/>
             <xsd:element minOccurs="0" name="unit" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:simpleType name="PositiveValueType">
