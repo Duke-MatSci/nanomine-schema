@@ -395,6 +395,8 @@
             </xsd:element>
             <xsd:element name="Control_ID" type="xsd:string" minOccurs="0"/>
             <xsd:element name="SchemaVersion" type="xsd:string" maxOccurs="1"/>
+            <xsd:element name="SchemaID" type="xsd:string" maxOccurs="1"/>
+            <xsd:element name="DatasetID" type="xsd:string" maxOccurs="1"/>
             <xsd:element minOccurs="0" name="DATA_SOURCE" type="DataSourceType">
                 <xsd:annotation>
                     <xsd:documentation>Metadata about data source, publication info. </xsd:documentation>
