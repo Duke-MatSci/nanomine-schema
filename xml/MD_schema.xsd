@@ -1,0 +1,975 @@
+<xsd:schema xmlns:hdf5="http://hdfgroup.org/HDF5/XML/schema/HDF5-File"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    <xsd:element name="PolymerNanocomposite" type="Root">
+        <xsd:annotation>
+            <xsd:documentation>main polymer nanocomposite (PNC) sample entry </xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="Root">
+        <xsd:sequence>
+            <xsd:element name="MATERIALS" type="MaterialsType">
+                <xsd:annotation>
+                    <xsd:documentation>Material constituent charateristics </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="SIMULATIONS" type="SimulationsType">
+                <xsd:annotation>
+                    <xsd:documentation>Simulation configurations and simulation-specific outputs</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MaterialsType">
+        <xsd:sequence>
+<!--             <xsd:element minOccurs="0" name="Matrix" type="MatrixType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Polymer matrix </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="Filler" type="FillerType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Nanoparticle filler</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element> -->
+            <xsd:element minOccurs="0" name="ModelSpecificTerms" type="ModelSpecificTermsType">
+                <xsd:annotation>
+                    <xsd:documentation>Materials system information that is specific to simulation models</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ComputationalStructureInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ModelSpecificTermsType">
+        <xsd:choice>
+            <xsd:element name="MDAAMaterials" type="MDAAMaterialsType">
+                <xsd:annotation>
+                    <xsd:documentation>Materials system information that is specific to all-atomistic MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDCGMaterials" type="MDCGMaterialsType">
+                <xsd:annotation>
+                    <xsd:documentation>Materials system information that is specific to coarse-grained MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <!-- FEA/DFT extra terms go here -->
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="MDAAMaterialsType">
+        <xsd:sequence>
+            <xsd:element name="NumberOfAtoms" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="StateAtRoomTemp" type="StateAtRoomTemperatureType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PolymerArchitectures" type="PolymerArchitecturesType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DegreeOfCrystallization" type="DegreeOfCrystallizationQualitativeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MonomerMass" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DegreeOfPolymerization" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NumberOfChains" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BulkDensity" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="StateAtRoomTemperatureType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="gas"/>
+            <xsd:enumeration value="low-viscosity liquid"/>
+            <xsd:enumeration value="high-viscosity liquid"/>
+            <xsd:enumeration value="simple soft solid"/>
+            <xsd:enumeration value="tough plastic solid"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="PolymerArchitecturesType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="linear"/>
+            <xsd:enumeration value="ring"/>
+            <xsd:enumeration value="star-branched"/>
+            <xsd:enumeration value="H-branched"/>
+            <xsd:enumeration value="comb"/>
+            <xsd:enumeration value="ladder"/>
+            <xsd:enumeration value="dendrimer"/>
+            <xsd:enumeration value="randomly-branched"/>
+            <xsd:enumeration value="polymer-network"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="DegreeOfCrystallizationQualitativeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="crystalline"/>
+            <xsd:enumeration value="semi-crystalline"/>
+            <xsd:enumeration value="amorphous"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="MDCGMaterialsType">
+        <xsd:sequence>
+            <xsd:element name="NumberOfCGBeadsForEachGraftChain" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NumberOfCGBeadsForEachMatrixChain" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NumberOfMatrixChains" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NumberDensity" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="InputFileType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="File" minOccurs="0" xmlns:ns0="http://mdcs.ns" ns0:_mod_mdcs_="/curator/blob-hoster"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SimulationsType">
+        <xsd:sequence>
+            <xsd:element name="MolecularDynamics" type="MolecularDynamicsType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Molecular dynamics simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <!-- FEA, DFT to be added here -->
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MolecularDynamicsType">
+        <xsd:sequence>
+            <xsd:element name="MDSimulationModel" type="MDSimulationModelType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>MD simulation model configurations</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDSimulationMethods" type="MDSimulationMethodsType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Methods used in the MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDSimulationSystem" type="MDSimulationSystemType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>System defined for the MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDMicrostructureOutput" type="MDMicrostructureOutputType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Microstructure output by the MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MDSimulationModelType">
+        <xsd:sequence>
+            <xsd:element name="MDSoftware" type="MDSoftwareType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Software used for MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Dimension" type="DimensionType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Dimension for MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDModelInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Input files for MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParticleTypeSpecifications" type="ParticleTypeSpecificationsType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AAModelConfiguration" type="AAModelConfigurationType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Configurations for all-atomistic MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CGModelConfiguration" type="CGModelConfigurationType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Configurations for coarse-grained MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="MDSoftwareType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NAMD"/>
+            <xsd:enumeration value="LAMMPS"/>
+            <xsd:enumeration value="Material Studio"/>
+            <xsd:enumeration value="HOOMD-Blue"/>
+            <xsd:enumeration value="GROMACS"/>
+            <xsd:enumeration value="others"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="DimensionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="2D"/>
+            <xsd:enumeration value="3D"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ParticleTypeSpecificationsType">
+        <xsd:sequence>
+            <xsd:element name="Particle" type="ParticleType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ParticleType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Description of the particle</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParticleType" type="ParticleTypePool">
+                <xsd:annotation>
+                    <xsd:documentation>Particle type of the particle</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ParticleTypePool">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="type 1"/>
+            <xsd:enumeration value="type 2"/>
+            <xsd:enumeration value="type 3"/>
+            <xsd:enumeration value="type 4"/>
+            <xsd:enumeration value="type 5"/>
+            <xsd:enumeration value="type 6"/>
+            <xsd:enumeration value="type 7"/>
+            <xsd:enumeration value="type 8"/>
+            <xsd:enumeration value="type 9"/>
+            <xsd:enumeration value="type 10"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="AAModelConfigurationType">
+        <xsd:sequence>
+            <xsd:element name="AAForcefieldName" type="AAForcefieldType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AAForcefieldType">
+        <xsd:sequence>
+            <xsd:element name="ForcefieldName" type="ForcefieldNamePool">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="value" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="unit" type="xsd:string" minOccurs="0"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="datafile" type="InputFileType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ForcefieldNamePool">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CHARMM"/>
+            <xsd:enumeration value="AMBER"/>
+            <xsd:enumeration value="ECEPP"/>
+            <xsd:enumeration value="GROMOS"/>
+            <xsd:enumeration value="CFF95"/>
+            <xsd:enumeration value="MM3"/>
+            <xsd:enumeration value="MMFF94"/>
+            <xsd:enumeration value="DREIDING"/>
+            <xsd:enumeration value="UFF"/>
+            <xsd:enumeration value="others"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="CGModelConfigurationType">
+        <xsd:sequence>
+            <xsd:element name="CGPotentialEnergyUnitType" type="CGPotentialEnergyUnitType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BondPotentialEnergy" type="BondPotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NonBondedPotentialEnergy" type="NonBondedPotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AnglePotentialEnergy" type="AnglePotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="OtherCGPotentialEnergy" type="OtherCGPotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CGPotentialEnergyUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LJ"/>
+            <xsd:enumeration value="real"/>
+            <xsd:enumeration value="SI"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="BondPotentialEnergyType">
+        <xsd:sequence>
+            <xsd:element name="BondStyle" type="BondStylePool">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BondType" type="ParticleTypePool" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BondCoefficient" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="EquilibriumBondLength" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PotentialWellDepth" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PotentialEnergyAtDistanceZero" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ShiftParameter" type="ScalarUncertainty" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="BondStylePool">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="fene"/>
+            <xsd:enumeration value="fene/expand"/>
+            <xsd:enumeration value="harmonic"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="NonBondedPotentialEnergyType">
+        <xsd:sequence>
+            <xsd:element name="PairStyle" type="PairStylePool">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParticleType1" type="ParticleTypePool" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParticleType2" type="ParticleTypePool" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PotentialWellDepth" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PotentialEnergyAtDistanceZero" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ShiftParameter" type="ScalarUncertainty" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="LJCutoffDistance" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="PairStylePool">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="lj/cut"/>
+            <xsd:enumeration value="lj/expand"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="AnglePotentialEnergyType">
+        <xsd:sequence>
+            <xsd:element name="AngleStyle" type="AngleStylePool">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AngleType" type="ParticleTypePool" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AngleCoefficient" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="EquilibriumAngle" type="PositiveValueType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="AngleStylePool">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="harmonic"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="OtherCGPotentialEnergyType">
+        <xsd:sequence>
+            <xsd:element name="OtherCGPotentialEnergyStyle" type="InputFileType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParticleType1" type="ParticleTypePool" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParticleType2" type="ParticleTypePool" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+
+    <xsd:complexType name="MDSimulationMethodsType">
+        <xsd:sequence>
+            <xsd:element name="MDMechanicalMethod" type="MDMechanicalMethodType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDTransportMethod" type="MDTransportMethodType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDThermodynamicMethod" type="MDThermodynamicMethodType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDStructralMethod" type="MDStructralMethodType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDThermalMethod" type="MDThermalMethodType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDDynamicApproachRelaxationTime" type="TimeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEquilibriumMethod" type="MDEquilibriumMethodType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="MDMechanicalMethodType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="non-equilibrium molecular dynamics"/>
+            <xsd:enumeration value="stress fluctuation"/>
+            <xsd:enumeration value="strain fluctuation"/>
+            <xsd:enumeration value="stress-strain fluctuation"/>
+            <xsd:enumeration value="steered molecular dynamics"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDTransportMethodType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="non-equilibrium molecular dynamics"/>
+            <xsd:enumeration value="equilibrium Green-Kubo method"/>
+            <xsd:enumeration value="Einstein form"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDThermodynamicMethodType">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDStructralMethodType">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDThermalMethodType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="thermal dynamic approach"/>
+            <xsd:enumeration value="dynamic approach"/>
+            <xsd:enumeration value="DMA"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDEquilibriumMethodType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="energy minimization"/>
+            <xsd:enumeration value="Monte Carlo method"/>
+            <xsd:enumeration value="molecular dynamics method"/>
+            <xsd:enumeration value="others"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="MDSimulationSystemType">
+        <xsd:sequence>
+            <xsd:element name="MDSimulationBoxSize" type="MDSimulationBoxSizeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDSimulationBoundaryConditions" type="MDSimulationBoundaryConditionsGeneralType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesForEquilibriumProcess" type="MDEnsemblesGeneralType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesForProduction" type="MDEnsemblesGeneralType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MDSimulationBoxSizeType">
+        <xsd:sequence>
+            <xsd:element name="MDSimulationBoxSizeX" type="DistanceType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDSimulationBoxSizeY" type="DistanceType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDSimulationBoxSizeZ" type="DistanceType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MDSimulationBoundaryConditionsGeneralType">
+        <xsd:sequence>
+            <xsd:element name="MDBoundaryConditionType" type="MDBoundaryConditionType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDBoundaryConditionDirection" type="MDBoundaryConditionDirectionType">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="MDBoundaryConditionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="p (periodic)"/>
+            <xsd:enumeration value="f (non-periodic and fixed)"/>
+            <xsd:enumeration value="s (non-periodic and shrink-wrapped)"/>
+            <xsd:enumeration value="m (non-periodic and shrink-wrapped with a minimum value)"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDBoundaryConditionDirectionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="x-direction"/>
+            <xsd:enumeration value="y-direction"/>
+            <xsd:enumeration value="z-direction"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="MDEnsemblesGeneralType">
+        <xsd:sequence>
+            <xsd:element name="MDEnsemblesSimulationType" type="MDEnsemblesSimulationType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesType" type="MDEnsemblesType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesN" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesP" type="PressureType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesV" type="VolumeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesT" type="TemperatureType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesE" type="EnergyType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesTotalTime" type="TimeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDEnsemblesTimeStep" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDPullingVelocity" type="VelocityType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDDeformVelocity" type="VelocityType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDStrainRate" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MDSeparationDistance" type="DistanceType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="MDEnsemblesSimulationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="adhesion energy calculations"/>
+            <xsd:enumeration value="shear test caculations"/>
+            <xsd:enumeration value="axial test calculations"/>
+            <xsd:enumeration value="others"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MDEnsemblesType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="microcanonical (NVE)"/>
+            <xsd:enumeration value="canonical (NVT)"/>
+            <xsd:enumeration value="isobaric-isothermal (NPT)"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="MDMicrostructureOutputType">
+        <xsd:sequence>
+            <xsd:element name="MDRadialDistributionFunction" 
+                xmlns:ns0="http://mdcs.ns" ns0:_mod_mdcs_="/curator/blob-hoster"
+                minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VolumeType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="value" type="xsd:double" minOccurs="1"/>
+            <xsd:element name="unit" type="VolumeUnitType" minOccurs="1"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="VolumeUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="cm^3"/>
+            <xsd:enumeration value="Angstrom^3"/>
+            <xsd:enumeration value="LJ unit"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="EnergyType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="value" type="xsd:double" minOccurs="1"/>
+            <xsd:element name="unit" type="EnergyUnitType" minOccurs="1"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="EnergyUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Kcal/mol"/>
+            <xsd:enumeration value="eV"/>
+            <xsd:enumeration value="J"/>
+            <xsd:enumeration value="LJ unit"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="VelocityType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="value" type="xsd:double" minOccurs="1"/>
+            <xsd:element name="unit" type="VelocityUnitType" minOccurs="1"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="VelocityUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Angstroms/femtosecond"/>
+            <xsd:enumeration value="m/s"/>
+            <xsd:enumeration value="LJ unit"/>
+            <xsd:enumeration value="Angstroms/picosecond"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+
+
+
+
+<!-- existing types  -->
+    <xsd:complexType name="Uncertainty">
+        <xsd:sequence>
+            <xsd:element name="type">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="absolute"/>
+                        <xsd:enumeration value="relative"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="value" type="xsd:double"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Distribution">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AxisLabel" type="AxisLabelType"/>
+            <xsd:element xmlns:ns0="http://mdcs.ns" name="data"
+                ns0:_mod_mdcs_="/diffusion/upload-excel"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ScalarUncertainty">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="value" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="unit" type="xsd:string" minOccurs="0"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="TimeUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="seconds"/>
+            <xsd:enumeration value="minutes"/>
+            <xsd:enumeration value="hours"/>
+            <xsd:enumeration value="days"/>
+            <xsd:enumeration value="LJ unit"/>
+            <xsd:enumeration value="femtoseconds"/>
+            <xsd:enumeration value="picoseconds"/>
+            <xsd:enumeration value="nanoseconds"/>
+            <xsd:enumeration value="microseconds"/>
+            <xsd:enumeration value="milliseconds"/>
+            <xsd:enumeration value="months"/>
+            <xsd:enumeration value="weeks"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="TimeType">
+        <xsd:sequence>
+            <xsd:element name="value" type="xsd:double"/>
+            <xsd:element name="unit" type="TimeUnitType"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+        <xsd:complexType name="DistanceType">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="description" type="xsd:string"/>
+            <xsd:element minOccurs="1" name="value" type="xsd:double"/>
+            <xsd:element name="unit" type="DistanceUnitType"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DistanceUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="m"/>
+            <xsd:enumeration value="cm"/>
+            <xsd:enumeration value="mm"/>
+            <xsd:enumeration value="um"/>
+            <xsd:enumeration value="nm"/>
+            <xsd:enumeration value="LJ unit"/>
+            <xsd:enumeration value="Angstroms"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PositiveValueUnitType">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="value" type="PositiveValueType"/>
+            <xsd:element minOccurs="0" name="unit" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="PositiveValueType">
+        <xsd:restriction base="xsd:double">
+            <xsd:minExclusive value="0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PressureType">
+        <xsd:sequence>
+            <xsd:element name="value" type="xsd:double"/>
+            <xsd:element name="unit" type="PressureUnit"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="PressureUnit">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Pa"/>
+            <xsd:enumeration value="kPa"/>
+            <xsd:enumeration value="MPa"/>
+            <xsd:enumeration value="GPa"/>
+            <xsd:enumeration value="LJ unit"/>
+            <xsd:enumeration value="atmospheres"/>
+            <xsd:enumeration value="bars"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="TemperatureType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="value" type="xsd:double" minOccurs="1"/>
+            <xsd:element name="unit" type="TemperatureUnitType" minOccurs="1"/>
+            <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            <xsd:element minOccurs="0" name="data" type="Distribution"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="TemperatureUnitType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Kelvin"/>
+            <xsd:enumeration value="Celsius"/>
+            <xsd:enumeration value="LJ unit"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="AxisLabelType">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="xName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="xUnit" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="yName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="yUnit" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
