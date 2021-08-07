@@ -298,6 +298,7 @@
             <xsd:enumeration value="type 8"/>
             <xsd:enumeration value="type 9"/>
             <xsd:enumeration value="type 10"/>
+            <xsd:enumeration value="*"/>
         </xsd:restriction>
     </xsd:simpleType>
 
