@@ -319,6 +319,7 @@
                     <xsd:documentation></xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="ForcefieldNameOthers" type="xsd:string" minOccurs="0"/>
             <xsd:element name="value" type="xsd:double" minOccurs="0"/>
             <xsd:element name="unit" type="xsd:string" minOccurs="0"/>
             <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
