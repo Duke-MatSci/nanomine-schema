@@ -41,7 +41,7 @@
             </xsd:element>
             <xsd:element name="ComputationalStructureInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Input file that records structural information used in simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -67,42 +67,42 @@
         <xsd:sequence>
             <xsd:element name="NumberOfAtoms" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number of atoms/particles in the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="StateAtRoomTemp" type="StateAtRoomTemperatureType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Material state at room temperature</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="PolymerArchitectures" type="PolymerArchitecturesType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Polymer architectures</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DegreeOfCrystallization" type="DegreeOfCrystallizationQualitativeType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Degree of crystallization</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MonomerMass" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Mass of monomers</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DegreeOfPolymerization" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The number of monomer units in the polymer</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="NumberOfChains" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number of polymer chains</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="BulkDensity" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Density of bulk material</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -144,22 +144,22 @@
         <xsd:sequence>
             <xsd:element name="NumberOfCGBeadsForEachGraftChain" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number of particles used to simulate the graft polymer chains</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="NumberOfCGBeadsForEachMatrixChain" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number of particles used to simulate the polymer matrix chains</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="NumberOfMatrixChains" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number of polymer matrix chains</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="NumberDensity" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number density of particles in the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -222,12 +222,12 @@
             </xsd:element>
             <xsd:element name="MDModelInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Input files for MD simulation</xsd:documentation>
+                    <xsd:documentation>Input script used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ParticleTypeSpecifications" type="ParticleTypeSpecificationsType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Particle type specifications for MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="AAModelConfiguration" type="AAModelConfigurationType" minOccurs="0">
@@ -263,15 +263,15 @@
 
     <xsd:complexType name="ParticleTypeSpecificationsType">
         <xsd:sequence>
-            <xsd:element name="Particle" type="ParticleType" maxOccurs="unbounded">
+            <xsd:element name="Particle" type="SingleParticleType" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Informations of a single particle used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="ParticleType">
+    <xsd:complexType name="SingleParticleType">
         <xsd:sequence>
             <xsd:element name="description" type="xsd:string" minOccurs="0">
                 <xsd:annotation>
@@ -280,7 +280,7 @@
             </xsd:element>
             <xsd:element name="ParticleType" type="ParticleTypePool">
                 <xsd:annotation>
-                    <xsd:documentation>Particle type of the particle</xsd:documentation>
+                    <xsd:documentation>The type of the specific particle used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -304,11 +304,7 @@
 
     <xsd:complexType name="AAModelConfigurationType">
         <xsd:sequence>
-            <xsd:element name="AAForcefieldName" type="AAForcefieldType">
-                <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
+            <xsd:element name="AAForcefieldName" type="AAForcefieldType"/>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -316,10 +312,14 @@
         <xsd:sequence>
             <xsd:element name="ForcefieldName" type="ForcefieldNamePool">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Force field used in the AA model</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ForcefieldNameOthers" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ForcefieldNameOthers" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Other force field used in the AA model than listed</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="value" type="xsd:double" minOccurs="0"/>
             <xsd:element name="unit" type="xsd:string" minOccurs="0"/>
             <xsd:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
@@ -346,27 +346,27 @@
         <xsd:sequence>
             <xsd:element name="CGPotentialEnergyUnitType" type="CGPotentialEnergyUnitType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The style of units used for the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="BondPotentialEnergy" type="BondPotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Information of bond potential energy used in the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="NonBondedPotentialEnergy" type="NonBondedPotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Information of non-bonded potential energy used in the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="AnglePotentialEnergy" type="AnglePotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Information of angle potential energy used in the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="OtherCGPotentialEnergy" type="OtherCGPotentialEnergyType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Information of potential energy other than bond/non-bonded/angle potential energy used in the simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -384,37 +384,37 @@
         <xsd:sequence>
             <xsd:element name="BondStyle" type="BondStylePool">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The style of the bond</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="BondType" type="ParticleTypePool" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The particle type assigned for this bond</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="BondCoefficient" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Bond coefficient, K</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="EquilibriumBondLength" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Equilibrium bond length, R0</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="PotentialWellDepth" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Potential well depth, epsilon</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="PotentialEnergyAtDistanceZero" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Potential energy at distance 0, sigma</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ShiftParameter" type="ScalarUncertainty" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Extra shift parameter used in fene/expand bond style, Delta</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -432,37 +432,37 @@
         <xsd:sequence>
             <xsd:element name="PairStyle" type="PairStylePool">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The style of the non-bonded pair</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ParticleType1" type="ParticleTypePool" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The particle type assigned for the first particle of the pair</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ParticleType2" type="ParticleTypePool" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The particle type assigned for the second particle of the pair</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="PotentialWellDepth" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Potential well depth, epsilon</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="PotentialEnergyAtDistanceZero" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Potential energy at distance 0, sigma</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ShiftParameter" type="ScalarUncertainty" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Extra shift parameter used in lj/expand pair style, Delta</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="LJCutoffDistance" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>LJ cutoff distance</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -479,22 +479,22 @@
         <xsd:sequence>
             <xsd:element name="AngleStyle" type="AngleStylePool">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The style of the angle</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="AngleType" type="ParticleTypePool" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The particle type assigned for the angle</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="AngleCoefficient" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Angle coefficient, K</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="EquilibriumAngle" type="PositiveValueType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Equilibrium angle, theta0</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -510,17 +510,17 @@
         <xsd:sequence>
             <xsd:element name="OtherCGPotentialEnergyStyle" type="InputFileType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Input scripts for CG potential energy style that cannot be captured by the schema</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ParticleType1" type="ParticleTypePool" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The particle type assignment</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ParticleType2" type="ParticleTypePool" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The particle type assignment in case more than one particle type was needed</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -532,37 +532,37 @@
         <xsd:sequence>
             <xsd:element name="MDMechanicalMethod" type="MDMechanicalMethodType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Mechanical methods used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDTransportMethod" type="MDTransportMethodType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Transport methods used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDThermodynamicMethod" type="MDThermodynamicMethodType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Thermodynamic methods used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDStructralMethod" type="MDStructralMethodType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Structral methods used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDThermalMethod" type="MDThermalMethodType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Thermal methods used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDDynamicApproachRelaxationTime" type="TimeType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Relaxation time for dynamic approach used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEquilibriumMethod" type="MDEquilibriumMethodType" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Equilibrium method used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -615,22 +615,22 @@
         <xsd:sequence>
             <xsd:element name="MDSimulationBoxSize" type="MDSimulationBoxSizeType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Size information of simulation boxes</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDSimulationBoundaryConditions" type="MDSimulationBoundaryConditionsGeneralType" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Boundary conditions used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesForEquilibriumProcess" type="MDEnsemblesGeneralType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Ensembles for equilibrium process used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesForProduction" type="MDEnsemblesGeneralType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Ensembles for production process used in MD simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -640,17 +640,17 @@
         <xsd:sequence>
             <xsd:element name="MDSimulationBoxSizeX" type="DistanceType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Size of simulation box in X direction</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDSimulationBoxSizeY" type="DistanceType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Size of simulation box in Y direction</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDSimulationBoxSizeZ" type="DistanceType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Size of simulation box in Z direction</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -660,12 +660,12 @@
         <xsd:sequence>
             <xsd:element name="MDBoundaryConditionType" type="MDBoundaryConditionType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Type of boundary condition</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDBoundaryConditionDirection" type="MDBoundaryConditionDirectionType">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Direction of boundary condition</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -692,67 +692,67 @@
         <xsd:sequence>
             <xsd:element name="MDEnsemblesSimulationType" type="MDEnsemblesSimulationType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Type of the calculation conducted on the ensembles</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesType" type="MDEnsemblesType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Type of the ensembles</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesN" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Number of particles in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesP" type="PressureType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Pressure set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesV" type="VolumeType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Volume set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesT" type="TemperatureType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Temperature set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesE" type="EnergyType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Energy set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesTotalTime" type="TimeType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Total time set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDEnsemblesTimeStep" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Timestep set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDPullingVelocity" type="VelocityType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Pulling velocity set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDDeformVelocity" type="VelocityType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Deforming velocity set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDStrainRate" type="PositiveValueUnitType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>Strain rate set in the simulation for equilibrium or production process</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDSeparationDistance" type="DistanceType" minOccurs="0">
                 <xsd:annotation>
-                    <xsd:documentation></xsd:documentation>
+                    <xsd:documentation>The distance between separate particles</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -779,7 +779,11 @@
         <xsd:sequence>
             <xsd:element name="MDRadialDistributionFunction" 
                 xmlns:ns0="http://mdcs.ns" ns0:_mod_mdcs_="/curator/blob-hoster"
-                minOccurs="0"/>
+                minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Output file from MD simulation that records radial distribution function of the particles</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 
