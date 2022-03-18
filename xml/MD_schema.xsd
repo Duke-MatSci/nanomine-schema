@@ -39,11 +39,6 @@
                     <xsd:documentation>Materials system information that is specific to simulation models</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ComputationalStructureInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
-                <xsd:annotation>
-                    <xsd:documentation>Input file that records structural information used in simulation</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -218,6 +213,11 @@
             <xsd:element name="Dimension" type="DimensionType" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation>Dimension for MD simulation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ComputationalStructureInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Input file that records structural information used in simulation</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="MDModelInputFile" type="InputFileType" minOccurs="0" maxOccurs="unbounded">
@@ -920,6 +920,8 @@
             <xsd:enumeration value="nm"/>
             <xsd:enumeration value="LJ unit"/>
             <xsd:enumeration value="Angstroms"/>
+            <xsd:enumeration value="pixel"/>
+            <xsd:enumeration value="voxel"/>
         </xsd:restriction>
     </xsd:simpleType>
     <xsd:complexType name="PositiveValueUnitType">
