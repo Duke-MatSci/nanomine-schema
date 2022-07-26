@@ -1341,7 +1341,7 @@
             <xsd:element minOccurs="0" name="FiberTensileModulus" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="FiberTensileStrength" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="FiberTensileElongation" type="ScalarUncertainty"/>
-            <xsd:element minOccurs="0" name="PoissonsRatio" type="xsd:double"/>
+            <xsd:element minOccurs="0" name="PoissonsRatio" type="ScalarUncertainty"/>
             <xsd:element minOccurs="0" name="Conditions" type="TensileMeasurementMethodType"/>
         </xsd:sequence>
     </xsd:complexType>
