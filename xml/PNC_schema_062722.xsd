@@ -671,7 +671,7 @@
                     <xsd:documentation>Nanoparticle filler</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element minOccurs="0" name="Interphase" type="InterphaseType">
+            <xsd:element minOccurs="0" name="Interphase" type="InterphaseType" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation>Interphase between matrix and filler</xsd:documentation>
                 </xsd:annotation>
