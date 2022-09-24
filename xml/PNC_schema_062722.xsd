@@ -19,7 +19,7 @@
         <xsd:sequence>
             <xsd:element name="RheometerType" type="RheometerType"/>
             <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
-            <xsd:element minOccurs="0" name="CapillarySize" type="PositiveValueUnitType"/>
+            <xsd:element minOccurs="0" name="CapillarySize" type="PositiveValueType"/>
             <xsd:element minOccurs="0" name="Equipment" type="xsd:string"/>
             <xsd:element minOccurs="0" name="data" type="ScalarUncertainty"/>
         </xsd:sequence>
@@ -669,6 +669,11 @@
             <xsd:element minOccurs="0" name="Filler" type="FillerType" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation>Nanoparticle filler</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NumberOfInterphase" type="PositiveValueUnitType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Number of interphase with different properties</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element minOccurs="0" name="Interphase" type="InterphaseType" maxOccurs="unbounded">
@@ -2874,11 +2879,6 @@
 <!-- Interphase section -->
     <xsd:complexType name="InterphaseType">
         <xsd:sequence>
-            <xsd:element name="NumberOfInterphase" type="PositiveValueUnitType" minOccurs="0">
-                <xsd:annotation>
-                    <xsd:documentation>Number of interphase with different properties</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
             <xsd:element maxOccurs="unbounded" minOccurs="0" name="InterphaseComponent"
                 type="InterphaseComponentType">
                 <xsd:annotation>
